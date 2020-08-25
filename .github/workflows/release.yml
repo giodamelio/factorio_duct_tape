@@ -1,15 +1,31 @@
 name: Publish Release
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
-  build:
-    name: Greeting
+  release:
+    name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        uses: actions/hello-world-javascript-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get tag
+        id: get_tag
+        run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Create zip
+        uses: montudor/action-zip@v0.1.0
         with:
-          who-to-greet: 'Mona the Octocat'
-        id: hello
-      - name: Echo the greeting's time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+          args: zip -X -r build/duct_tape_{{ steps.get_tag.outputs.TAG }}.zip src/*
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: mod_zip
+            path: build/duct_tape_{{ steps.get_tag.outputs.TAG }}.zip
+      # - name: Upload to release
+      #   uses: JasonEtco/upload-to-release@master
+      #   with:
+      #     args: build/graphql-api.zip application/zip
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
