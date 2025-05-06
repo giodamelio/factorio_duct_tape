@@ -1,11 +1,12 @@
 {
   "name": "duct_tape",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Duct Tape",
   "author": "Gio d'Amelio",
-  "factorio_version": "1.0",
+  "factorio_version": "2.0",
   "dependencies": [
-    "base >= 1.0"
+    "base >= 2.0"
   ],
-  "description": "Replaces repair packs with duct tape. Made because of a joke."
+  "description": "Replaces repair packs with duct tape. Made because of a joke.",
+  "homepage": "https://github.com/giodamelio/factorio_duct_tape"
 }
