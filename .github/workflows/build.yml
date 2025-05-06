@@ -24,3 +24,14 @@ jobs:
         with:
           action: compress
           mod-folder: src
+
+      - name: Get Version
+        id: version
+        run: echo "version=$(jq -r .version src/info.json)" >> $GITHUB_OUTPUT
+
+      - name: Upload Mod Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: duct_tape_${{ steps.version.outputs.version }}
+          path: duct_tape_${{ steps.version.outputs.version }}.zip
+
