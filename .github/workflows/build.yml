@@ -9,16 +9,16 @@ jobs:
   build-mod:
     name: Build Mod
     runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-        - name: Validate Mod
-          uses: TheBrutalX/factorio-mod-uploader-action@v2
-          with:
-            action: validate
+      - name: Validate Mod
+        uses: TheBrutalX/factorio-mod-uploader-action@v2
+        with:
+          action: validate
 
-        - name: Create zip
-          uses: TheBrutalX/factorio-mod-uploader-action@v2
-          with:
-            action: compress
+      - name: Create zip
+        uses: TheBrutalX/factorio-mod-uploader-action@v2
+        with:
+          action: compress
